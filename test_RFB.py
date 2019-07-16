@@ -17,6 +17,7 @@ from layers.functions import Detect,PriorBox
 from utils.nms_wrapper import nms
 from utils.timer import Timer
 
+
 parser = argparse.ArgumentParser(description='Receptive Field Block Net')
 
 parser.add_argument('-v', '--version', default='RFB_vgg',
@@ -116,10 +117,13 @@ def test_net(save_folder, net, detector, cuda, testset, transform, max_per_image
             c_scores = scores[inds, j]
             c_dets = np.hstack((c_bboxes, c_scores[:, np.newaxis])).astype(
                 np.float32, copy=False)
-
-            keep = nms(c_dets, 0.45, force_cpu=args.cpu)
+            
+            keep = nms(c_dets, 0.45, force_cpu=False)
             c_dets = c_dets[keep, :]
-            all_boxes[j][i] = c_dets
+            all_boxes[j][0] = c_dets
+            #keep = nms(c_dets, 0.45, force_cpu=args.cpu)
+            #c_dets = c_dets[keep, :]
+            #all_boxes[j][i] = c_dets
         if max_per_image > 0:
             image_scores = np.hstack([all_boxes[j][i][:, -1] for j in range(1,num_classes)])
             if len(image_scores) > max_per_image:
