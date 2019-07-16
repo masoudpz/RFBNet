@@ -1,4 +1,4 @@
-# Receptive Field Block Net for Accurate and Fast Object Detection
+# Receptive Field Block Net for Accurate and Fast Object Detection (Windows Version)
 
 By Songtao Liu, Di Huang, Yunhong Wang
 
