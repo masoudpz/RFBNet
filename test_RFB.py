@@ -118,7 +118,7 @@ def test_net(save_folder, net, detector, cuda, testset, transform, max_per_image
             c_dets = np.hstack((c_bboxes, c_scores[:, np.newaxis])).astype(
                 np.float32, copy=False)
             
-            keep = nms(c_dets, 0.45, force_cpu=False)
+            keep = py_cpu_nms(c_dets, 0.45)
             c_dets = c_dets[keep, :]
             all_boxes[j][0] = c_dets
             #keep = nms(c_dets, 0.45, force_cpu=args.cpu)
